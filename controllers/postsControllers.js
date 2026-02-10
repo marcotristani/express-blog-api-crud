@@ -58,7 +58,23 @@ function store(req, res) {
 
 //funzione da eseguire nella rotta update
 function update(req, res) {
-  res.send("logica update");
+  //recupero id, oggetto post relatico a quell'id e gestisco eventuali errori come fatto nelle altre logiche in cui si richiedeva id come parametro
+  const id = parseInt(req.params.id);
+  const post = posts.find((post) => post.id === id);
+  if (!post) {
+    res.status(404);
+    return res.send({
+      error: "Not Found",
+      message: "il post da modificare non è presente nella lista dei post",
+    });
+  }
+
+  post.title = req.body.title;
+  post.image = req.body.image;
+  post.content = req.body.content;
+  post.tags = req.body.tags;
+
+  res.json(post);
 }
 
 //funzione da eseguire nella rotta modify
