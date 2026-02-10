@@ -3,12 +3,25 @@ const posts = require("./../data/postsList");
 
 //funzione da eseguire nella rotta index
 function index(req, res) {
+  //recuperiamo il valore per la chiave tag fornitaci nella query string
+  const tag = req.query.tag.toLowerCase();
+
+  //creo array con lista posts da filtrare e lo inizializzo come la lista originale
+  let filteredPosts = posts;
+
+  //verifico se il tag arrivato è presente nell'array tags dell'oggetto posts e mi faccio tornare i post che soddisfano questa condizione
+  filteredPosts = posts.filter((post) => {
+    const normalTags = post.tags.map((tag) => tag.toLowerCase());
+    return normalTags.includes(tag);
+  });
+
   //costruisco l'oggetto da restituire come json
   const objectJson = {
-    number_posts: posts.length,
-    posts: posts,
+    number_posts: filteredPosts.length,
+    posts: filteredPosts,
   };
 
+  //   res.send(tag);
   res.json(objectJson);
 }
 
