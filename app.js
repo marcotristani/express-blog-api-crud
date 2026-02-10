@@ -5,6 +5,10 @@ const port = 3000;
 //importo il router
 const routerPosts = require("./routers/routerPosts");
 
+//registro il body-parser per "application/json"
+//attivo funzionalità per codificare il body
+app.use(express.json());
+
 //rendo accessibili i file statici della cartella public
 app.use(express.static("public"));
 
