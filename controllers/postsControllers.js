@@ -136,14 +136,20 @@ function modify(req, res) {
     });
   }
 
-  //detrutturo oggetto req.body per comodità
-  const { title, content, image, tags } = req.body;
-  //vado a verificare quali proprietà mi sono arrivate nel body e modifico quelle arrivate
+  // //detrutturo oggetto req.body per comodità
+  // const { title, content, image, tags } = req.body;
+  // //vado a verificare quali proprietà mi sono arrivate nel body e modifico quelle arrivate
 
-  title && (post.title = title);
-  content && (post.content = content);
-  image && (post.image = image);
-  tags && (post.tags = tags);
+  // title && (post.title = title);
+  // content && (post.content = content);
+  // image && (post.image = image);
+  // tags && (post.tags = tags);
+
+  // Definisco le proprietà modificabili
+  const property = ["title", "content"];
+
+  //vado avedere se mi sono arrivatè in request proprietà che combaciano con quelle modificabili e le vado a modificare
+  property.forEach((prop) => req.body[prop] && (post[prop] = req.body[prop]));
 
   //vado a stampare un anteprima dell'elemento modificato
   res.json(post);
