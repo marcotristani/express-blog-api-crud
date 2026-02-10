@@ -3,7 +3,13 @@ const posts = require("./../data/postsList");
 
 //funzione da eseguire nella rotta index
 function index(req, res) {
-  res.send("logica index");
+  //costruisco l'oggetto da restituire come json
+  const objectJson = {
+    number_posts: posts.length,
+    posts: posts,
+  };
+
+  res.json(objectJson);
 }
 
 //funzione da eseguire nella rotta show
