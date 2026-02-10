@@ -69,11 +69,13 @@ function update(req, res) {
     });
   }
 
+  //vado a riassegnare il valore delle proprietà del post selezionato con i valori delle proprietà che mi sono arriavti nel body della request
   post.title = req.body.title;
   post.image = req.body.image;
   post.content = req.body.content;
   post.tags = req.body.tags;
 
+  //stampo un anteprima dell'oggetto modificato
   res.json(post);
 }
 
