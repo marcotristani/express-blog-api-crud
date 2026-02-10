@@ -37,7 +37,23 @@ function show(req, res) {
 
 //funzione da eseguire nella rotta store
 function store(req, res) {
-  res.send("logica store");
+  //vado a crearmi un id univoco(provvisorio poichè quando avrò i database non avrò questa necessità)
+  const id = Date.now();
+
+  //vado a creare l'oggetto nel nuovo post con le informazioni ricavate dal body della richiesta all'endpoint della nostra API
+  const newPost = {
+    id: id,
+    title: req.body.title,
+    content: req.body.content,
+    image: req.body.image,
+    tags: req.body.tags,
+  };
+
+  //faccio un push di quest'oggetto nell'array della lista dei post
+  posts.push(newPost);
+
+  //faccio ritornare questo nuovo oggetto per vederne l'anteprima
+  res.json(newPost);
 }
 
 //funzione da eseguire nella rotta update
