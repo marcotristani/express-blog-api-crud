@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 
 //importo il router
-const routerPosts = require("./routers/posts");
+const routerPosts = require("./routers/routerPosts");
 
 //rendo accessibili i file statici della cartella public
 app.use(express.static("public"));
