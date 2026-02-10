@@ -96,10 +96,10 @@ function modify(req, res) {
   const { title, content, image, tags } = req.body;
   //vado a verificare quali proprietà mi sono arrivate nel body e modifico quelle arrivate
 
-  title ? (post.title = title) : "";
-  content ? (post.content = content) : "";
-  image ? (post.image = image) : "";
-  tags ? (post.tags = tags) : "";
+  title && (post.title = title);
+  content && (post.content = content);
+  image && (post.image = image);
+  tags && (post.tags = tags);
 
   //vado a stampare un anteprima dell'elemento modificato
   res.json(post);
