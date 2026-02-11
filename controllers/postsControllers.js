@@ -1,23 +1,8 @@
 //importo lista post che mi servirà nelle funzioni
 const posts = require("./../data/postsList");
 
-//FUNZIONE PER VERIFICARE ACCESSO API
-function verifyAPIKey(queryAPI_Key, res) {
-  const API_Key = queryAPI_Key;
-  if (API_Key !== "MarcoAPI2000") {
-    res.status(401);
-    return res.json({
-      error: "Invalid API Key",
-      message: "La chiave dell'API non è valida",
-    });
-  }
-}
-
 //funzione da eseguire nella rotta index
 function index(req, res) {
-  //verifico che la chiave per accedere all'API sia giusta
-  verifyAPIKey(req.query.API_Key, res);
-
   //creo array con lista posts da filtrare e lo inizializzo come la lista originale
   let filteredPosts = posts;
 
@@ -46,9 +31,6 @@ function index(req, res) {
 
 //funzione da eseguire nella rotta show
 function show(req, res) {
-  //verifico che la chiave per accedere all'API sia giusta
-  verifyAPIKey(req.query.API_Key, res);
-
   //recuper il parametro id che mi viene dato nella richiesta dell'endpoint
   const id = parseInt(req.params.id);
 
@@ -72,9 +54,6 @@ function show(req, res) {
 
 //funzione da eseguire nella rotta store
 function store(req, res) {
-  //verifico che la chiave per accedere all'API sia giusta
-  verifyAPIKey(req.query.API_Key, res);
-
   //vado a crearmi un id univoco(provvisorio poichè quando avrò i database non avrò questa necessità)
   const id = Date.now();
 
@@ -91,14 +70,12 @@ function store(req, res) {
   posts.push(newPost);
 
   //faccio ritornare questo nuovo oggetto per vederne l'anteprima
+  res.status(201);
   res.json(newPost);
 }
 
 //funzione da eseguire nella rotta update
 function update(req, res) {
-  //verifico che la chiave per accedere all'API sia giusta
-  verifyAPIKey(req.query.API_Key, res);
-
   //recupero id, oggetto post relatico a quell'id e gestisco eventuali errori come fatto nelle altre logiche in cui si richiedeva id come parametro
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
@@ -122,9 +99,6 @@ function update(req, res) {
 
 //funzione da eseguire nella rotta modify
 function modify(req, res) {
-  //verifico che la chiave per accedere all'API sia giusta
-  verifyAPIKey(req.query.API_Key, res);
-
   //recupero id, oggetto post relatico a quell'id e gestisco eventuali errori come fatto nelle altre logiche in cui si richiedeva id come parametro
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
@@ -157,9 +131,6 @@ function modify(req, res) {
 
 //funzione da eseguire nella rotta destroy
 function destroy(req, res) {
-  //verifico che la chiave per accedere all'API sia giusta
-  verifyAPIKey(req.query.API_Key, res);
-
   //recupero id dell'elemento che voglio andare ad eliminare
   const id = parseInt(req.params.id);
 
